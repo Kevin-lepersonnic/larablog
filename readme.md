@@ -9,7 +9,7 @@
 
 ### Création des tables avec les migrations
 
-* Taper les commandes suivantes 
+* Taper les commandes suivantes
     ```
     php artisan make:migration CreatePostsTable
     php artisan migrate
@@ -29,7 +29,7 @@
     ```
 * Taper les commandes suivantes
     ```
-    php artisan migrate:rollback 
+    php artisan migrate:rollback
     php artisan migrate
     ```
 
@@ -48,7 +48,7 @@ factory : Classe qui génère des données fictives
 
     use Illuminate\Database\Seeder;
     use Illuminate\Support\Facades\DB;
-    
+
     class UserSeeder extends Seeder
     {
         /**
@@ -105,7 +105,7 @@ factory : Classe qui génère des données fictives
 
     use Illuminate\Database\Seeder;
     use App\Models\Post;
-    
+
     class PostSeeder extends Seeder
     {
         /**
@@ -161,9 +161,9 @@ php artisan db:seed
     {
         // Récupère les 5 articles les plus récents avec les informations de l'utilisateur
         $posts = Post::latest()->take(5)->with('user')->get();
-        
+
         return view('home', [
-            'posts' => $posts    
+            'posts' => $posts
         ]);
     }
     ```
@@ -178,7 +178,7 @@ php artisan db:seed
     public function index()
     {
         ...
-        
+
         return view('posts.index', [
             'posts' => ...
         ]);
@@ -203,7 +203,7 @@ use Illuminate\Pagination\Paginator;
 class AppServiceProvider extends ServiceProvider
 {
     ...
-    
+
     public function boot()
     {
         Paginator::useBootstrap();
@@ -215,7 +215,7 @@ Modifier le fichier *ressources/views/posts/index.blade.php* comme ceci :
 
 ```
 <h1>Liste des articles du blog</h1>
-    
+
 <nav>
     {{ $posts->links() }}
 </nav>
@@ -311,7 +311,7 @@ Dans le formulaire, rajouter la directive blade qui permet de contrôler la fail
     ```php
     public function store(Request $request)
     {
-        
+
     }
     ```
 * Mettre en place les règles de validation de la requête
@@ -400,13 +400,13 @@ Dans le formulaire, rajouter la directive blade qui permet de contrôler la fail
     public function signin(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->intended('/');
         }
-        
+
         return back()->withErrors([
             'credentials' => 'Les identifiants ne correspondent pas'
         ]);
@@ -560,16 +560,16 @@ Rappel : Un modèle c'est une classe qui fait le lien avec la table dans la base
                 'name' => 'RPG',
             ],
             [
-                'name' => 'Action'    
+                'name' => 'Action'
             ],
             [
-                'name' => 'Tactique'    
+                'name' => 'Tactique'
             ],
             [
                 'name' => 'FPS'
             ],
             [
-                'name' => 'Simulation'    
+                'name' => 'Simulation'
             ]
         ]);
     }
@@ -593,7 +593,7 @@ Rappel : Un modèle c'est une classe qui fait le lien avec la table dans la base
     {
         return $this->belongsToMany(Post::class);
     }
-    
+
     // Dans le modèle Post
     public function categories()
     {
@@ -637,7 +637,7 @@ Rappel : Un modèle c'est une classe qui fait le lien avec la table dans la base
     // Rajouter ces lignes
     $rememberMe = $request->input('remember_me');
     $rememberMe = $rememberMe === 'on';
-    
+
     // Modifier la connexion
     if (Auth::attempt($credentials, $rememberMe)) {
         $request->session()->regenerate();
@@ -675,7 +675,7 @@ Rappel : Un modèle c'est une classe qui fait le lien avec la table dans la base
 * Cette méthode récupère la liste des utilisateurs correspondant à un filtre (sur le nom de l'utilisateur)
     ```php
     // Récupère la liste des utilisateurs contenant le texte toto
-    User::where('nom du champ', 'like', '%toto%')->get();  
+    User::where('nom du champ', 'like', '%toto%')->get();
     ```
 * Le filtre sera récupéré depuis la chaîne de requête
     ```php
@@ -722,3 +722,5 @@ use Illuminate\Support\Facades\URL;
 
 
 BONJOUR CECI EST LA MODIFICATION.
+
+C'EST BON.
