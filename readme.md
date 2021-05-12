@@ -718,3 +718,7 @@ Ne pas oublier le use tout en haut du fichier
 ```php
 use Illuminate\Support\Facades\URL;
 ```
+
+
+
+BONJOUR CECI EST LA MODIFICATION.
